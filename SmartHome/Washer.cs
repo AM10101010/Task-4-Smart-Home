@@ -3,16 +3,18 @@ public class Washer
     public string Brand { get; set; }
     public int Temperature { get; set; }
 
+    private const double KWhPerDegree = 1.2;  // TODO: Placeholder rate, adjusted based on real data later
+
     public void StartWash()
     {
-        // Code to start the washing machine
+        Console.WriteLine($"{Brand} Starts washing.");
     }
     public void StopWash()
     {
-        // Code to stop the washing machine
+        Console.WriteLine($"{Brand} Stops washing.");
     }
     public void PrintWashEnergy(int temp)
     {
-
+        Console.WriteLine($"LG washer uses {KWhPerDegree} kwh per wash.");
     }
 }

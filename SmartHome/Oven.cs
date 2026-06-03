@@ -2,16 +2,17 @@ public class Oven
 {
     public string Brand { get; set; }
     public int MaxTemperature { get; set; }
+    private const double KWhPerDegree = 2.5;  // TODO: Placeholder rate, adjusted based on real data later
     public void StartCooking()
     {
-        // Code to start the oven
+        Console.WriteLine($"Starting cooking with {Brand} at max temperature {MaxTemperature} degrees.");
     }
     public void StopCooking()
     {
-        // Code to stop the oven
+        Console.WriteLine($"Stopping cooking with {Brand}.");
     }
-    public void PrintHeatingEnergy()
+    public void PrintHeatingEnergy(int temp)
     {
-        // Code to print the heating status of the oven
+        Console.WriteLine($"Oven {Brand} uses {KWhPerDegree} kWh per hour.");
     }
 }
