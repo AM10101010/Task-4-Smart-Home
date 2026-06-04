@@ -90,3 +90,25 @@ class Program
         }
     }
 }
+
+// Reflektionsfrågor efter Del 1
+/*
+
+Frågor:
+1. Varför behövde du kontrollera vilken typ varje objekt hade?
+2. Vad händer om du lägger till en ny klass CoffeeMachine?
+3. Vilka metoder måste du ändra om du lägger till CoffeeMachine?
+4. Vad är problemet med att listan är List<object>?
+5. Vad händer om du råkar glömma en apparattyp i ReportAllEnergy()
+
+Svar:
+1. Det finns ingen gemensam bas- eller gränssnittstyp som alla enheter ärver från, så vi måste kontrollera typen för att veta vilka metoder vi kan anropa på varje objekt.
+2. Om vi lägger till en ny klass CoffeeMachine, måste vi också uppdatera både RunMorningRoutine och ReportAllEnergy för att hantera den nya typen
+3. Vi måste ändra både RunMorningRoutine och ReportAllEnergy för att lägga till kontroll och hantering av CoffeeMachine-objekt.
+4. Problemet med att använda List<object> är att vi förlorar typinformationen, vilket gör det svårt att arbeta med objekten utan att göra typkontroller och kastningar,
+5. Om man glömmer en apparattyp i ReportAllEnergy, kommer den typen inte att logga sin energiförbrukningm.
+
+
+
+*/
+
