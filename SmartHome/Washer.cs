@@ -1,20 +1,25 @@
-public class Washer
+public class Washer : Appliance
 {
-    public string Brand { get; set; }
-    public int Temperature { get; set; }
+    public int CapacityKg { get; set; }
 
-    private const double KWhPerDegree = 1.2;  // TODO: Placeholder rate, adjusted based on real data later
+    private const double DailyEnergyConsumption = 1.2;  // TODO: Placeholder rate, adjusted based on real data later
 
-    public void StartWash()
+    public Washer(string brand, string room, int capacityKg) : base(brand, room)
     {
-        Console.WriteLine($"{Brand} Starts washing.");
+        CapacityKg = capacityKg;
     }
-    public void StopWash()
+
+    public override void TurnOn()
     {
-        Console.WriteLine($"{Brand} Stops washing.");
+        base.TurnOn();
+        Console.WriteLine($"{Brand} starts washing program.");
     }
-    public void PrintWashEnergy(int temp)
+    public override void TurnOff()
     {
-        Console.WriteLine($"LG washer uses {KWhPerDegree} kwh per wash.");
+        base.TurnOff();
+        Console.WriteLine($"{Brand} stops washing.");
     }
+    public override double GetDailyEnergyUsage() => DailyEnergyConsumption;
+
+    public override string GetInfo() => $"{base.GetInfo()} — washer, {CapacityKg} kg drum";
 }

@@ -1,18 +1,21 @@
-public class Oven
+public class Oven : Appliance
 {
-    public string Brand { get; set; }
     public int MaxTemperature { get; set; }
-    private const double KWhPerDegree = 2.5;  // TODO: Placeholder rate, adjusted based on real data later
-    public void StartCooking()
+    private const double DailyEnergyConsumption = 2.5;  // TODO: Placeholder rate, adjusted based on real data later
+    public Oven(string brand, string room, int maxTemperature) : base(brand, room)
     {
-        Console.WriteLine($"Starting cooking with {Brand} at max temperature {MaxTemperature} degrees.");
+        MaxTemperature = maxTemperature;
     }
-    public void StopCooking()
+    public override void TurnOn()
     {
-        Console.WriteLine($"Stopping cooking with {Brand}.");
+        base.TurnOn();
+        Console.WriteLine($"Oven {Brand} is now on.");
     }
-    public void PrintHeatingEnergy(int temp)
+    public override void TurnOff()
     {
-        Console.WriteLine($"Oven {Brand} uses {KWhPerDegree} kWh per hour.");
-    }
+        base.TurnOff();
+        Console.WriteLine($"Oven {Brand} is now off.");
+    }       
+    public override double GetDailyEnergyUsage() => DailyEnergyConsumption;
+    public override string GetInfo() => $"{base.GetInfo()} — oven, max temperature {MaxTemperature}°C";
 }

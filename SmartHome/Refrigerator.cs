@@ -1,20 +1,24 @@
-public class Refrigerator
+public class Refrigerator : Appliance
 {
-    public string Brand { get; set; }
-    public int CapacityKg { get; set; }
+    public int Temperature { get; set; }
 
-    private const double KWhPerKg = 3.6;  // TODO: Placeholder rate, adjusted based on real data later
+    private const double DailyEnergyConsumption = 3.6;  // TODO: Placeholder rate, adjusted based on real data later
 
-    public void StartCooling()
+    public Refrigerator(string brand, string room, int temperature) : base(brand, room)
     {
-       Console.WriteLine($"Refrigerator {Brand} starts cooling with capacity {CapacityKg} kg.");
+        Temperature = temperature;
     }
-    public void StopCooling()
+
+    public override void TurnOn()
     {
-        Console.WriteLine($"Refrigerator {Brand} stops cooling.");
+        base.TurnOn();
+        Console.WriteLine($"Refrigerator {Brand} is now on.");
     }
-    public void PrintCoolingEnergy(int capacity)
-    {
-        Console.WriteLine($"Refrigerator {Brand} uses {KWhPerKg} kWh per day.");
+    public override void TurnOff()
+    {        base.TurnOff();
+        Console.WriteLine($"Refrigerator {Brand} is now off.");
     }
+    public override double GetDailyEnergyUsage() => DailyEnergyConsumption;
+
+    public override string GetInfo() => $"{base.GetInfo()} — refrigerator, set to {Temperature}°C";
 }

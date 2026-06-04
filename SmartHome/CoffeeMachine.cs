@@ -1,21 +1,23 @@
-public class CoffeeMachine
+public class CoffeeMachine : Appliance
 {
-    public string Brand { get; set; }
     public int CupsPerBrew { get; set; }
 
-    private const double KWhPerCup = 0.1;  // TODO: Placeholder rate, adjusted based on real data later
+    private const double DailyEnergyConsumption = 0.3;  // TODO: Placeholder rate, adjusted based on real data later
 
-    public void StartBrewing()
+    public CoffeeMachine(string brand, string room, int cupsPerBrew) : base(brand, room)
     {
-        Console.WriteLine($"Coffee machine {Brand} starts brewing {CupsPerBrew} cups.");
+        CupsPerBrew = cupsPerBrew;
     }
-    public void StopBrewing()
+    public override void TurnOn()
     {
-        Console.WriteLine($"Coffee machine {Brand} has stopped brewing.");
+        base.TurnOn();
+        Console.WriteLine($"Coffee machine {Brand} is now on.");
     }
-    public void PrintBrewingEnergy(int cups)
+    public override void TurnOff()
     {
-        double total = KWhPerCup * cups;
-        Console.WriteLine($"Coffee machine {Brand} uses {total} kWh to brew {cups} cups.");
+        base.TurnOff();
+        Console.WriteLine($"Coffee machine {Brand} is now off.");
     }
+    public override double GetDailyEnergyUsage() => DailyEnergyConsumption;
+    public override string GetInfo() => $"{base.GetInfo()} — coffee machine, brews {CupsPerBrew} cups per brew";    
 }
