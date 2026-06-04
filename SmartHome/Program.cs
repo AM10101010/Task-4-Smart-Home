@@ -87,6 +87,12 @@ class Program
                 robotVacuum.StartCleaning();
                 robotVacuum.StopCleaning();
             }
+            else if (device is CoffeeMachine)
+            {
+                CoffeeMachine coffeeMachine = (CoffeeMachine)device;
+                coffeeMachine.StartBrewing();
+                coffeeMachine.StopBrewing();
+            }
         }
     }
 }
@@ -109,6 +115,17 @@ Svar:
 5. Om man glömmer en apparattyp i ReportAllEnergy, kommer den typen inte att logga sin energiförbrukningm.
 
 
+
+Del 2: Lägg till en ny apparat och känn problemet
+Fråga:
+// När jag lade till CoffeeMachine behövde jag ändra...
+
+Svar:
+//Behövde lägga till kod på följande ställen:
+//   1. Skapa CoffeeMachine-objektet i Main.
+//   2. Lägga till objektet i listan devices.
+//   3. Lägga till en ny "else if (device is CoffeeMachine)"-gren i RunMorningRoutine.
+//   4. Lägga till en ny "else if (device is CoffeeMachine)"-gren i ReportAllEnergy.
 
 */
 
