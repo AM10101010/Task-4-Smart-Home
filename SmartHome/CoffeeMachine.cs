@@ -7,15 +7,15 @@ public class CoffeeMachine
 
     public void StartBrewing()
     {
-        Console.WriteLine("Starta kaffebryggning");
+        Console.WriteLine($"Coffee machine {Brand} starts brewing {CupsPerBrew} cups.");
     }
     public void StopBrewing()
     {
-        Console.WriteLine("Stoppa kaffebryggning");
+        Console.WriteLine($"Coffee machine {Brand} has stopped brewing.");
     }
     public void PrintBrewingEnergy(int cups)
     {
         double total = KWhPerCup * cups;
-        Console.WriteLine($"Kaffemaskin {Brand} använder {total} kWh för att brygga {cups} koppar.");
+        Console.WriteLine($"Coffee machine {Brand} uses {total} kWh to brew {cups} cups.");
     }
 }
