@@ -11,11 +11,13 @@ class Program
         Refrigerator refrigerator = new Refrigerator { Brand = "Samsung", CapacityKg = 20 };
         Oven oven = new Oven { Brand = "Electrolux", MaxTemperature = 10 };
         RobotVacuum robotVacuum = new RobotVacuum { Brand = "Xiaomi", BatteryLevel = 10 };
+        CoffeeMachine coffeeMachine = new CoffeeMachine { Brand = "Nespresso", CupsPerBrew = 2 };
         // Lägg till dem i listan devices.
         devices.Add(washer);
         devices.Add(refrigerator);
         devices.Add(oven);
         devices.Add(robotVacuum);
+        devices.Add(coffeeMachine);
 
         RunMorningRoutine(devices);
         Console.WriteLine("");
@@ -49,6 +51,11 @@ class Program
             {
                 RobotVacuum robotVacuum = (RobotVacuum)device;
                 robotVacuum.PrintCleaningEnergy(robotVacuum.BatteryLevel);
+            }
+            else if (device is CoffeeMachine)
+            {
+                CoffeeMachine coffeeMachine = (CoffeeMachine)device;
+                coffeeMachine.PrintBrewingEnergy(coffeeMachine.CupsPerBrew);
             }
         }
     }
