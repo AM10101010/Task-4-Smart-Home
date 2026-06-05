@@ -7,7 +7,7 @@ class Program
 
         Console.WriteLine("Morning routine:");
         SmartHomeController smartHomeController = new SmartHomeController();
-
+        /*
         smartHomeController.AddDevice(new Washer("LG", "Laundry", capacityKg: 8));
         smartHomeController.AddDevice(new Refrigerator("Samsung", "Kitchen", temperature: 4));
         smartHomeController.AddDevice(new Oven("Electrolux", "Kitchen", maxTemperature: 250));
@@ -15,7 +15,8 @@ class Program
         smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
         smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21));
         smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2));
-
+  */
+        /*
         smartHomeController.PrintStatusReport();
         Console.WriteLine();
         smartHomeController.TurnOnAll();
@@ -24,6 +25,42 @@ class Program
         double total = smartHomeController.GetTotalDailyEnergyUsage();
         Console.WriteLine("\nTurning off all devices...");
         smartHomeController.TurnOffAll();
+*/
+
+        //Del 11: Labb med new
+        //Test:
+
+          SmartLamp lamp1 = new SmartLamp("IKEA", "Hallway", 80);
+          Appliance lamp2 = lamp1;
+          lamp1.TurnOn(); // SmartLamp's TurnOn() körs
+          lamp2.TurnOn(); // Appliance's TurnOn() körs, inte SmartLamp's
+
+          // With "new" (current code) — output differs because the variable's type decides:
+          //   Smart lamp IKEA in Hallway turns on with brightness 80%.   // lamp1 (SmartLamp)
+          //   IKEA in Hallway is now ON.                                 // lamp2 (Appliance)
+          //
+          // If "new" were changed to "override" — output is the same on both lines,
+          // because the object's real type (SmartLamp) decides:
+          //   Smart lamp IKEA in Hallway turns on with brightness 80%.
+          //   Smart lamp IKEA in Hallway turns on with brightness 80%.
+          
+          // 1. Blir utskriften samma?
+          //    Nej. Trots att lamp1 och lamp2 är samma objekt blir utskriften olika,
+          //    eftersom variablerna har olika deklarerade typer.
+
+          // 2. Vilken metod körs när variabeln har typen SmartLamp?
+          //    SmartLamps egen TurnOn()
+
+          // 3. Vilken metod körs när variabeln har typen Appliance?
+          //    Basklassens (Appliance) TurnOn(), trots att objektet faktiskt är en SmartLamp.
+
+          // 4. Varför är detta farligt eller förvirrande?
+          //    Samma objekt gör olika saker beroende på vilken typ variabeln har.
+          //    Det kan ge buggar som är svåra att hitta.
+
+          // 5. Vad händer om du byter "new" till "override"?
+          //    Då kör båda raderna SmartLamps TurnOn(), för då bestämmer objektets
+          //    riktiga typ vilken metod som körs.
     }
 }
 
@@ -114,3 +151,6 @@ Test B: Ta bort override
   referens körs basklassens TurnOn() istället, så Washers version triggas inte.
 
 */
+
+
+
