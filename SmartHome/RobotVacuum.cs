@@ -1,6 +1,6 @@
 public class RobotVacuum : Appliance
 {
-    public int BatteryLevel { get; set; }
+    public int BatteryLevel { get; }
     private const double DailyEnergyConsumption = 0.4; // TODO: Placeholder rate, adjusted based on real data later
 
     public RobotVacuum(string brand, string room, int batteryLevel) : base(brand, room)

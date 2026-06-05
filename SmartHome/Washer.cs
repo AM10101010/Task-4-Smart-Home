@@ -1,6 +1,6 @@
 public class Washer : Appliance
 {
-    public int CapacityKg { get; set; }
+    public int CapacityKg { get; }
 
     private const double DailyEnergyConsumption = 1.2;  // TODO: Placeholder rate, adjusted based on real data later
 

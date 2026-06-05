@@ -1,6 +1,6 @@
 public class Refrigerator : Appliance
 {
-    public int Temperature { get; set; }
+    public int Temperature { get; }
 
     private const double DailyEnergyConsumption = 3.6;  // TODO: Placeholder rate, adjusted based on real data later
 
@@ -12,11 +12,12 @@ public class Refrigerator : Appliance
     public override void TurnOn()
     {
         base.TurnOn();
-        Console.WriteLine($"Refrigerator {Brand} is now on.");
+        Console.WriteLine($"Refrigerator {Brand} starts cooling to {Temperature}°C.");
     }
     public override void TurnOff()
-    {        base.TurnOff();
-        Console.WriteLine($"Refrigerator {Brand} is now off.");
+    {
+        base.TurnOff();
+        Console.WriteLine($"Refrigerator {Brand} stops cooling.");
     }
     public override double GetDailyEnergyUsage() => DailyEnergyConsumption;
 
