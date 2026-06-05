@@ -13,6 +13,7 @@ class Program
         smartHomeController.AddDevice(new Oven("Electrolux", "Kitchen", maxTemperature: 250));
         smartHomeController.AddDevice(new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100));
         smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
+        smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21)); // Del 7: new device, controller unchanged
 
         smartHomeController.PrintStatusReport();
         Console.WriteLine();
