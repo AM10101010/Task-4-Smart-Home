@@ -5,26 +5,23 @@ class Program
     static void Main()
     {
 
-        List<Appliance> devices = new List<Appliance>
-        {
-            new Washer("LG", "Laundry", capacityKg: 8),
-            new Refrigerator("Samsung", "Kitchen", temperature: 4),
-            new Oven("Electrolux", "Kitchen", maxTemperature: 250),
-            new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100),
-            new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2)
-        };
-
         Console.WriteLine("Morning routine:");
-        foreach (Appliance device in devices)
-        {
-            Console.WriteLine();
-            Console.WriteLine($"Turning on {device.GetInfo()}...");
-            device.TurnOn();
-            Console.WriteLine($"Daily energy usage: {device.GetDailyEnergyUsage()} kWh");
-            Console.WriteLine($"Turning off {device.GetInfo()}...");
-            device.TurnOff();
-            Console.WriteLine();
-        }
+        SmartHomeController smartHomeController = new SmartHomeController();
+
+        smartHomeController.AddDevice(new Washer("LG", "Laundry", capacityKg: 8));
+        smartHomeController.AddDevice(new Refrigerator("Samsung", "Kitchen", temperature: 4));
+        smartHomeController.AddDevice(new Oven("Electrolux", "Kitchen", maxTemperature: 250));
+        smartHomeController.AddDevice(new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100));
+        smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
+
+        smartHomeController.PrintStatusReport();
+        Console.WriteLine();
+        smartHomeController.TurnOnAll();
+        Console.WriteLine("\nStatus report:");
+        smartHomeController.PrintStatusReport();
+        double total = smartHomeController.GetTotalDailyEnergyUsage();
+        Console.WriteLine("\nTurning off all devices...");
+        smartHomeController.TurnOffAll();
     }
 }
 
