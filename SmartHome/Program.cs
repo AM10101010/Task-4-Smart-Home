@@ -13,29 +13,17 @@ class Program
             new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100),
             new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2)
         };
-     
-        RunMorningRoutine(devices);
-        Console.WriteLine("");
-        ReportAllEnergy(devices);
-        Console.WriteLine("");
 
-    }
-
-    private static void ReportAllEnergy(List<Appliance> devices)
-    {
-        // No type checks, no casts — polymorphism dispatches to the right override.
+        Console.WriteLine("Morning routine:");
         foreach (Appliance device in devices)
         {
-            Console.WriteLine($"{device.GetInfo()} uses {device.GetDailyEnergyUsage()} kWh/day.");
-        }
-    }
-
-    static void RunMorningRoutine(List<Appliance> devices)
-    {
-        foreach (Appliance device in devices)
-        {
+            Console.WriteLine();
+            Console.WriteLine($"Turning on {device.GetInfo()}...");
             device.TurnOn();
+            Console.WriteLine($"Daily energy usage: {device.GetDailyEnergyUsage()} kWh");
+            Console.WriteLine($"Turning off {device.GetInfo()}...");
             device.TurnOff();
+            Console.WriteLine();
         }
     }
 }
@@ -51,10 +39,12 @@ Frågor:
 5. Vad händer om du råkar glömma en apparattyp i ReportAllEnergy()
 
 Svar:
-1. Det finns ingen gemensam bas- eller gränssnittstyp som alla enheter ärver från, så vi måste kontrollera typen för att veta vilka metoder vi kan anropa på varje objekt.
+1. Det finns ingen gemensam bas- eller gränssnittstyp som alla enheter ärver från, 
+så vi måste kontrollera typen för att veta vilka metoder vi kan anropa på varje objekt.
 2. Om vi lägger till en ny klass CoffeeMachine, måste vi också uppdatera både RunMorningRoutine och ReportAllEnergy för att hantera den nya typen
 3. Vi måste ändra både RunMorningRoutine och ReportAllEnergy för att lägga till kontroll och hantering av CoffeeMachine-objekt.
-4. Problemet med att använda List<object> är att vi förlorar typinformationen, vilket gör det svårt att arbeta med objekten utan att göra typkontroller och kastningar,
+4. Problemet med att använda List<object> är att vi förlorar typinformationen, 
+vilket gör det svårt att arbeta med objekten utan att göra typkontroller och kastningar,
 5. Om man glömmer en apparattyp i ReportAllEnergy, kommer den typen inte att logga sin energiförbrukningm.
 
 
@@ -69,5 +59,17 @@ Svar:
 //   2. Lägga till objektet i listan devices.
 //   3. Lägga till en ny "else if (device is CoffeeMachine)"-gren i RunMorningRoutine.
 //   4. Lägga till en ny "else if (device is CoffeeMachine)"-gren i ReportAllEnergy.
+
+Frågor efter Del 5
+1. Varför fungerar device.TurnOn() trots att device har typen Appliance?
+2. Vilken metod körs om objektet egentligen är en RobotVacuum?
+3. Vad blev bättre jämfört med List<object>
+
+Svar:
+1. Eftersom TurnOn() är en virtuell metod i bas-klassen Appliance, kommer
+när vi anropar device.TurnOn(), att den körs polymorft. Det betyder att den version av TurnOn() 
+som hör till den faktiska typen av objektet (t.ex. RobotVacuum) kommer att köras, även om variabeln device har typen Appliance.
+2. Om objektet är en RobotVacuum, kommer RobotVacuum-klassens override av TurnOn() att köras.
+3. Jämfört med List<object> behöver vi inte längre göra typkontroller och kastningar, vilket gör koden mer robust och lättare att underhålla.
 
 */
