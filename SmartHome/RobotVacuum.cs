@@ -1,7 +1,15 @@
-public class RobotVacuum : Appliance
+public class RobotVacuum : Appliance, ISchedulable
 {
+
     public int BatteryLevel { get; }
     private const double DailyEnergyConsumption = 0.4; // TODO: Placeholder rate, adjusted based on real data later
+
+    public DateTime NextRun { get; set; }
+    public void Schedule(DateTime time)
+    {
+        NextRun = time;
+        Console.WriteLine($"Robot vacuum {Brand} is scheduled to run at {NextRun}.");
+    }
 
     public RobotVacuum(string brand, string room, int batteryLevel) : base(brand, room)
     {

@@ -1,6 +1,7 @@
-public class CoffeeMachine : Appliance
+public class CoffeeMachine : Appliance, ISchedulable
 {
     public int CupsPerBrew { get; }
+    public DateTime NextRun { get; set; }
 
     private const double DailyEnergyConsumption = 0.3;  // TODO: Placeholder rate, adjusted based on real data later
 
@@ -20,4 +21,11 @@ public class CoffeeMachine : Appliance
     }
     public override double GetDailyEnergyUsage() => DailyEnergyConsumption;
     public override string GetInfo() => $"{base.GetInfo()} — coffee machine, brews {CupsPerBrew} cups per brew";
+
+    public void Schedule(DateTime time)
+    {
+        NextRun = time;
+        Console.WriteLine($"{Brand} is scheduled to run at {NextRun}.");
+
+    }
 }

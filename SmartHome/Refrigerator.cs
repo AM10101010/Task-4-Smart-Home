@@ -22,4 +22,5 @@ public class Refrigerator : Appliance
     public override double GetDailyEnergyUsage() => DailyEnergyConsumption;
 
     public override string GetInfo() => $"{base.GetInfo()} — refrigerator, set to {Temperature}°C";
+
 }
