@@ -26,6 +26,5 @@ public class CoffeeMachine : Appliance, ISchedulable
     {
         NextRun = time;
         Console.WriteLine($"{Brand} is scheduled to run at {NextRun}.");
-
     }
 }

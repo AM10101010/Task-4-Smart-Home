@@ -13,7 +13,8 @@ class Program
         smartHomeController.AddDevice(new Oven("Electrolux", "Kitchen", maxTemperature: 250));
         smartHomeController.AddDevice(new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100));
         smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
-        smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21)); // Del 7: new device, controller unchanged
+        smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21));
+        smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2));
 
         smartHomeController.PrintStatusReport();
         Console.WriteLine();
@@ -69,5 +70,33 @@ när vi anropar device.TurnOn(), att den körs polymorft. Det betyder att den ve
 som hör till den faktiska typen av objektet (t.ex. RobotVacuum) kommer att köras, även om variabeln device har typen Appliance.
 2. Om objektet är en RobotVacuum, kommer RobotVacuum-klassens override av TurnOn() att köras.
 3. Jämfört med List<object> behöver vi inte längre göra typkontroller och kastningar, vilket gör koden mer robust och lättare att underhålla.
+
+
+Frågor efter Del 9
+
+1. Varför kan vi inte anropa Schedule() direkt på en variabel av typen Appliance?
+   - För att Appliance inte känner till någon Schedule()-metod. Kompilatorn tittar
+     bara på den deklarerade typen, och eftersom alla apparater inte kan schemaläggas
+     finns metoden inte i basklassen – bara i ISchedulable.
+
+2. Varför fungerar det efter att vi castar till ISchedulable?
+   - När vi castar säger vi till kompilatorn att objektet faktiskt följer ISchedulable.
+     Då vet den att Schedule() finns, och anropet blir tillåtet.
+
+3. Vad betyder det att RobotVacuum både är en Appliance och en ISchedulable?
+   - Att den har två roller samtidigt: den är en apparat (ärver allt gemensamt från
+     Appliance) och den kan dessutom schemaläggas. Vi kan alltså behandla den både
+     som en vanlig Appliance och som ett schemaläggbart objekt.
+
+4. Varför ska inte Schedule() ligga direkt i Appliance?
+   - Då skulle alla apparater tvingas ha den, även de som inte kan schemaläggas, till
+     exempel ugnen och kylen. Schemaläggning passar bättre som något man väljer att
+     lägga till via ett interface.
+
+5. Vad är skillnaden mellan arv och interface i det här exemplet?
+   - Arv handlar om vad något är – alla apparater är en Appliance och delar samma
+     grund. Ett interface handlar om vad något kan göra – bara vissa apparater kan
+     schemaläggas. Arv ger gemensam kod, interface ger en gemensam förmåga utan att
+     röra basklassen.
 
 */

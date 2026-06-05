@@ -38,4 +38,12 @@ public class SmartHomeController
         }
         return totalEnergyUsage;
     }
+    public void ScheduleAllSchedulableDevices(DateTime time)
+    {
+        foreach (Appliance device in _devices)
+        {
+            // 1. Kontrollera om device implementerar ISchedulable.
+            if (device is ISchedulable schedulable) { schedulable.Schedule(time); }
+        }
+    }
 }
