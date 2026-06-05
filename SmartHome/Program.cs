@@ -99,4 +99,18 @@ Frågor efter Del 9
      schemaläggas. Arv ger gemensam kod, interface ger en gemensam förmåga utan att
      röra basklassen.
 
+Del 10: Labb med virtual och override
+
+Test A: Ta bort virtual
+ -  Appliance.TurnOn()' because it is not marked virtual, abstract, or override
+ -  För att kunna override TurnOn() i Refrigerator måste den vara markerad som virtual i bas-klassen Appliance. 
+    Utan virtual kan inte TurnOn() polymorft anropas, och kompilatorn tillåter inte override i Refrigerator.
+
+Test B: Ta bort override
+- warning CS0114: 'Washer.TurnOn()' hides inherited member 'Appliance.TurnOn()'. 
+  To make the current member override that implementation, add the override keyword. 
+  Otherwise add the new keyword.
+- Koden kompilerar, men utan override döljs Washers metod: via en Appliance-
+  referens körs basklassens TurnOn() istället, så Washers version triggas inte.
+
 */
