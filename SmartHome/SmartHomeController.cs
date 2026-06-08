@@ -60,4 +60,36 @@ public class SmartHomeController
 
         return result;
     }
+    public Appliance? FindDeviceByBrand(string brand)
+    {
+
+        foreach (Appliance device in _devices)
+        {
+            if (device.Brand == brand)
+            {
+                return device;
+            }
+        }
+        return null;   // hittade ingen
+    }
+    public void TurnOnDeviceByBrand(string brand)
+    {
+        Appliance? device = FindDeviceByBrand(brand);
+
+
+        if (device != null)
+        {
+            device.TurnOn();
+
+            if (device is ISchedulable schedulable)
+            {
+                schedulable.Schedule(DateTime.Now.AddHours(1));
+            }
+        }
+        else
+        {
+            Console.WriteLine("No device found with that brand.");
+        }
+    }
+
 }

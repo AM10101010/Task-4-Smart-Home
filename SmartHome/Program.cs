@@ -7,7 +7,7 @@ class Program
 
     Console.WriteLine("Morning routine:");
     SmartHomeController smartHomeController = new SmartHomeController();
-    /*
+    
     smartHomeController.AddDevice(new Washer("LG", "Laundry", capacityKg: 8));
     smartHomeController.AddDevice(new Refrigerator("Samsung", "Kitchen", temperature: 4));
     smartHomeController.AddDevice(new Oven("Electrolux", "Kitchen", maxTemperature: 250));
@@ -15,7 +15,7 @@ class Program
     smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
     smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21));
     smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2));
-*/
+
     /*
     smartHomeController.PrintStatusReport();
     Console.WriteLine();
@@ -26,6 +26,7 @@ class Program
     Console.WriteLine("\nTurning off all devices...");
     smartHomeController.TurnOffAll();
 */
+
 
     //Del 11: Labb med new
     //Test:
@@ -68,6 +69,9 @@ class Program
       Console.WriteLine($"Scheduling {device} to run at {DateTime.Now.AddHours(1)}...");
       device.Schedule(DateTime.Now.AddHours(1));
     }
+
+    // Del 14: Extra utmaning - filtrera med interface
+    smartHomeController.TurnOnDeviceByBrand("LG");
   }
 }
 
@@ -206,3 +210,5 @@ Test B: Ta bort override
 //    För att alla objekten implementerar ISchedulable. Listan bryr sig inte om
 //    den exakta klassen, bara om att de uppfyller kontraktet. Därför har varje
 //    element garanterat NextRun och Schedule().
+
+*/
