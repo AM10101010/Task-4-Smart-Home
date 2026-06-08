@@ -6,7 +6,7 @@ public class Oven : Appliance
     {
         MaxTemperature = maxTemperature;
     }
-    public override void TurnOn()
+    public sealed override void TurnOn()
     {
         base.TurnOn();
         Console.WriteLine($"Oven {Brand} starts preheating.");

@@ -150,6 +150,43 @@ Test B: Ta bort override
 - Koden kompilerar, men utan override döljs Washers metod: via en Appliance-
   referens körs basklassens TurnOn() istället, så Washers version triggas inte.
 
+
+// ---- Frågor efter Del 11 ----
+
+// 1. Blir utskriften samma?
+//    Nej. lamp1 och lamp2 är samma objekt, men utskriften blir olika.
+//    Med "new" bestämmer variabelns typ vilken metod som körs.
+
+// 2. Vilken metod körs när variabeln har typen SmartLamp?
+//    SmartLamps egen TurnOn() (den med "new").
+//    -> "Smart lamp IKEA in Hallway turns on with brightness 80%."
+
+// 3. Vilken metod körs när variabeln har typen Appliance?
+//    Appliance sin TurnOn(), även om objektet egentligen är en SmartLamp.
+//    -> "IKEA in Hallway is now ON."
+
+// 4. Varför är detta farligt eller förvirrande?
+//    Samma objekt gör olika saker beroende på variabelns typ.
+//    Man tror att metoden byts ut, men "new" bara gömmer den gamla.
+//    Det kan ge buggar som är svåra att hitta.
+
+// 5. Vad händer om du byter "new" till "override"?
+//    Då körs SmartLamps TurnOn() på båda raderna, för då bestämmer
+//    objektets riktiga typ. Utskriften blir lika på båda raderna.
+
+
+
+  Del 12: Labb med sealed
+  1. Vad säger kompilatorn?
+//    - Fel CS0239: PizzaOven får inte override:a TurnOn() eftersom metoden är
+//    sealed i Oven.
+  2. Varför får PizzaOven inte override:a TurnOn()?
+  //    - För att Oven har markerat TurnOn() som sealed, vilket betyder att ingen subklass
+  3. När kan det vara rimligt att använda sealed override?
+//    - När man vill att en metod i en subklass ska vara den sista versionen som kan ändras,
+  4. Vad kan PizzaOven fortfarande göra i stället? Kan den override:a någon annan metod
+  //    - PizzaOven kan fortfarande override:a andra metoder som inte är sealed, som TurnOff() eller
+
 */
 
 

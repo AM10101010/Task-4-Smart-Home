@@ -6,7 +6,7 @@ public class SmartLamp : Appliance
     {
         Brightness = brightness;
     }
-    public override void TurnOn()
+    public new void TurnOn()
     {
         Console.WriteLine($"Smart lamp {Brand} in {Room} turns on with brightness {Brightness}%.");
     }
