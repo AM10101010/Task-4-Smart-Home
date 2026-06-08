@@ -46,4 +46,18 @@ public class SmartHomeController
             if (device is ISchedulable schedulable) { schedulable.Schedule(time); }
         }
     }
+    internal List<ISchedulable> GetSchedulableDevices()
+    {
+        List<ISchedulable> result = new List<ISchedulable>();
+
+        foreach (Appliance device in _devices)
+        {
+            if (device is ISchedulable schedulable)   // Kontrollerar och castar i ett steg <= Del 13: Extra utmaning - filtrera med interface
+            {
+                result.Add(schedulable);
+            }
+        }
+
+        return result;
+    }
 }

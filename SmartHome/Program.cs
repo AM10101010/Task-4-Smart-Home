@@ -2,66 +2,73 @@
 using System.Collections.Generic;
 class Program
 {
-    static void Main()
-    {
+  static void Main()
+  {
 
-        Console.WriteLine("Morning routine:");
-        SmartHomeController smartHomeController = new SmartHomeController();
-        /*
-        smartHomeController.AddDevice(new Washer("LG", "Laundry", capacityKg: 8));
-        smartHomeController.AddDevice(new Refrigerator("Samsung", "Kitchen", temperature: 4));
-        smartHomeController.AddDevice(new Oven("Electrolux", "Kitchen", maxTemperature: 250));
-        smartHomeController.AddDevice(new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100));
-        smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
-        smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21));
-        smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2));
-  */
-        /*
-        smartHomeController.PrintStatusReport();
-        Console.WriteLine();
-        smartHomeController.TurnOnAll();
-        Console.WriteLine("\nStatus report:");
-        smartHomeController.PrintStatusReport();
-        double total = smartHomeController.GetTotalDailyEnergyUsage();
-        Console.WriteLine("\nTurning off all devices...");
-        smartHomeController.TurnOffAll();
+    Console.WriteLine("Morning routine:");
+    SmartHomeController smartHomeController = new SmartHomeController();
+    /*
+    smartHomeController.AddDevice(new Washer("LG", "Laundry", capacityKg: 8));
+    smartHomeController.AddDevice(new Refrigerator("Samsung", "Kitchen", temperature: 4));
+    smartHomeController.AddDevice(new Oven("Electrolux", "Kitchen", maxTemperature: 250));
+    smartHomeController.AddDevice(new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100));
+    smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
+    smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21));
+    smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2));
+*/
+    /*
+    smartHomeController.PrintStatusReport();
+    Console.WriteLine();
+    smartHomeController.TurnOnAll();
+    Console.WriteLine("\nStatus report:");
+    smartHomeController.PrintStatusReport();
+    double total = smartHomeController.GetTotalDailyEnergyUsage();
+    Console.WriteLine("\nTurning off all devices...");
+    smartHomeController.TurnOffAll();
 */
 
-        //Del 11: Labb med new
-        //Test:
+    //Del 11: Labb med new
+    //Test:
 
-          SmartLamp lamp1 = new SmartLamp("IKEA", "Hallway", 80);
-          Appliance lamp2 = lamp1;
-          lamp1.TurnOn(); // SmartLamp's TurnOn() körs
-          lamp2.TurnOn(); // Appliance's TurnOn() körs, inte SmartLamp's
+    SmartLamp lamp1 = new SmartLamp("IKEA", "Hallway", 80);
+    Appliance lamp2 = lamp1;
+    lamp1.TurnOn(); // SmartLamp's TurnOn() körs
+    lamp2.TurnOn(); // Appliance's TurnOn() körs, inte SmartLamp's
 
-          // With "new" (current code) — output differs because the variable's type decides:
-          //   Smart lamp IKEA in Hallway turns on with brightness 80%.   // lamp1 (SmartLamp)
-          //   IKEA in Hallway is now ON.                                 // lamp2 (Appliance)
-          //
-          // If "new" were changed to "override" — output is the same on both lines,
-          // because the object's real type (SmartLamp) decides:
-          //   Smart lamp IKEA in Hallway turns on with brightness 80%.
-          //   Smart lamp IKEA in Hallway turns on with brightness 80%.
-          
-          // 1. Blir utskriften samma?
-          //    Nej. Trots att lamp1 och lamp2 är samma objekt blir utskriften olika,
-          //    eftersom variablerna har olika deklarerade typer.
+    // With "new" (current code) — output differs because the variable's type decides:
+    //   Smart lamp IKEA in Hallway turns on with brightness 80%.   // lamp1 (SmartLamp)
+    //   IKEA in Hallway is now ON.                                 // lamp2 (Appliance)
+    //
+    // If "new" were changed to "override" — output is the same on both lines,
+    // because the object's real type (SmartLamp) decides:
+    //   Smart lamp IKEA in Hallway turns on with brightness 80%.
+    //   Smart lamp IKEA in Hallway turns on with brightness 80%.
 
-          // 2. Vilken metod körs när variabeln har typen SmartLamp?
-          //    SmartLamps egen TurnOn()
+    // 1. Blir utskriften samma?
+    //    Nej. Trots att lamp1 och lamp2 är samma objekt blir utskriften olika,
+    //    eftersom variablerna har olika deklarerade typer.
 
-          // 3. Vilken metod körs när variabeln har typen Appliance?
-          //    Basklassens (Appliance) TurnOn(), trots att objektet faktiskt är en SmartLamp.
+    // 2. Vilken metod körs när variabeln har typen SmartLamp?
+    //    SmartLamps egen TurnOn()
 
-          // 4. Varför är detta farligt eller förvirrande?
-          //    Samma objekt gör olika saker beroende på vilken typ variabeln har.
-          //    Det kan ge buggar som är svåra att hitta.
+    // 3. Vilken metod körs när variabeln har typen Appliance?
+    //    Basklassens (Appliance) TurnOn(), trots att objektet faktiskt är en SmartLamp.
 
-          // 5. Vad händer om du byter "new" till "override"?
-          //    Då kör båda raderna SmartLamps TurnOn(), för då bestämmer objektets
-          //    riktiga typ vilken metod som körs.
+    // 4. Varför är detta farligt eller förvirrande?
+    //    Samma objekt gör olika saker beroende på vilken typ variabeln har.
+    //    Det kan ge buggar som är svåra att hitta.
+
+    // 5. Vad händer om du byter "new" till "override"?
+    //    Då kör båda raderna SmartLamps TurnOn(), för då bestämmer objektets
+    //    riktiga typ vilken metod som körs.
+
+    List<ISchedulable> schedulables = smartHomeController.GetSchedulableDevices();
+    foreach (ISchedulable device in schedulables)
+    {
+      Console.WriteLine($"Scheduling {device} to run at {DateTime.Now.AddHours(1)}...");
+      device.Schedule(DateTime.Now.AddHours(1));
     }
+  }
 }
 
 // Reflektionsfrågor efter Del 1
@@ -175,19 +182,27 @@ Test B: Ta bort override
 //    objektets riktiga typ. Utskriften blir lika på båda raderna.
 
 
+// ---- Frågor efter Del 12 ----
 
-  Del 12: Labb med sealed
-  1. Vad säger kompilatorn?
-//    - Fel CS0239: PizzaOven får inte override:a TurnOn() eftersom metoden är
+// 1. Vad säger kompilatorn?
+//    Fel CS0239: PizzaOven får inte override:a TurnOn(), för metoden är
 //    sealed i Oven.
-  2. Varför får PizzaOven inte override:a TurnOn()?
-  //    - För att Oven har markerat TurnOn() som sealed, vilket betyder att ingen subklass
-  3. När kan det vara rimligt att använda sealed override?
-//    - När man vill att en metod i en subklass ska vara den sista versionen som kan ändras,
-  4. Vad kan PizzaOven fortfarande göra i stället? Kan den override:a någon annan metod
-  //    - PizzaOven kan fortfarande override:a andra metoder som inte är sealed, som TurnOff() eller
 
-*/
+// 2. Varför får PizzaOven inte override:a TurnOn()?
+//    För att Oven har markerat TurnOn() med "sealed". Det stänger metoden
+//    så att ingen klass under Oven kan skriva om den igen.
 
+// 3. När kan det vara rimligt att använda sealed override?
+//    När en metod är "färdig" och man vill vara säker på att ingen subklass
+//    ändrar den, t.ex. för att skydda viktig logik.
 
+// 4. Vad kan PizzaOven fortfarande göra i stället?
+//    Den kan override:a andra metoder som inte är sealed, t.ex. GetInfo(),
+//    TurnOff() eller GetDailyEnergyUsage(). Bara TurnOn() är låst. Den ärver
+//    Ovens TurnOn() som den är och kan lägga till egna metoder/properties.
 
+// ---- Fråga efter Del 13 ----
+// Varför kan listan vara List<ISchedulable> även om objekten är olika klasser?
+//    För att alla objekten implementerar ISchedulable. Listan bryr sig inte om
+//    den exakta klassen, bara om att de uppfyller kontraktet. Därför har varje
+//    element garanterat NextRun och Schedule().
