@@ -14,7 +14,7 @@ class Program
     smartHomeController.AddDevice(new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100));
     smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
     smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21));
-    smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2));
+    //smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2));
 
     /*
     smartHomeController.PrintStatusReport();
@@ -66,11 +66,11 @@ class Program
     List<ISchedulable> schedulables = smartHomeController.GetSchedulableDevices();
     foreach (ISchedulable device in schedulables)
     {
-      Console.WriteLine($"Scheduling {device} to run at {DateTime.Now.AddHours(1)}...");
+      Console.WriteLine($"Scheduling {device.GetType().Name} to run at {DateTime.Now.AddHours(1)}...");
       device.Schedule(DateTime.Now.AddHours(1));
     }
 
-    // Del 14: Extra utmaning - filtrera med interface
+    // Del 14: Extra utmaning - sök efter apparat
     smartHomeController.TurnOnDeviceByBrand("LG");
   }
 }
