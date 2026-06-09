@@ -3,8 +3,7 @@ public class AirConditioner : Appliance, ISchedulable
     public int TargetTemperature { get; }
     public DateTime NextRun { get; set; }
 
-    private const double DailyEnergyConsumption = 5.0;  // TODO: Placeholder rate, adjusted based on real data later
-
+    private const double DailyEnergyConsumption = 5.0;
     public AirConditioner(string brand, string room, int targetTemperature) : base(brand, room)
     {
         TargetTemperature = targetTemperature;

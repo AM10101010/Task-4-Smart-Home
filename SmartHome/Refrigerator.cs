@@ -2,7 +2,7 @@ public class Refrigerator : Appliance
 {
     public int Temperature { get; }
 
-    private const double DailyEnergyConsumption = 3.6;  // TODO: Placeholder rate, adjusted based on real data later
+    private const double DailyEnergyConsumption = 3.6;
 
     public Refrigerator(string brand, string room, int temperature) : base(brand, room)
     {

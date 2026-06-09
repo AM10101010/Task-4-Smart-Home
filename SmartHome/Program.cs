@@ -14,6 +14,7 @@ class Program
     smartHomeController.AddDevice(new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100));
     smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
     smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21));
+    smartHomeController.AddDevice(new PizzaOven("Ooni", "Garden", maxTemperature: 450));
     smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2)); 
    
 

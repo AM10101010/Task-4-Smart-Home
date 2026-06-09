@@ -1,7 +1,7 @@
 public class Oven : Appliance
 {
     public int MaxTemperature { get; }
-    private const double DailyEnergyConsumption = 2.5;  // TODO: Placeholder rate, adjusted based on real data later
+    private const double DailyEnergyConsumption = 2.5;
     public Oven(string brand, string room, int maxTemperature) : base(brand, room)
     {
         MaxTemperature = maxTemperature;

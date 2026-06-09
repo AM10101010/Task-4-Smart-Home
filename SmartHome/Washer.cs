@@ -1,7 +1,7 @@
 public class Washer : Appliance, ISchedulable
 {
     public int CapacityKg { get; }
-    private const double DailyEnergyConsumption = 1.2;  // TODO: Placeholder rate, adjusted based on real data later
+    private const double DailyEnergyConsumption = 1.2;
     public DateTime NextRun { get; set; }
     public Washer(string brand, string room, int capacityKg) : base(brand, room)
     {
