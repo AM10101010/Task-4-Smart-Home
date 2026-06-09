@@ -29,7 +29,7 @@ class Program
     smartHomeController.TurnOffAll();
 
     //Del 11: Labb med new + (additional comments row 171-190) <=
-    
+
     //Test:
     SmartLamp lamp1 = new SmartLamp("IKEA", "Hallway", 80);
     Appliance lamp2 = lamp1;
