@@ -1,6 +1,7 @@
-public class AirConditioner : Appliance
+public class AirConditioner : Appliance, ISchedulable
 {
     public int TargetTemperature { get; }
+    public DateTime NextRun { get; set; }
 
     private const double DailyEnergyConsumption = 5.0;  // TODO: Placeholder rate, adjusted based on real data later
 
@@ -24,4 +25,10 @@ public class AirConditioner : Appliance
     public override double GetDailyEnergyUsage() => DailyEnergyConsumption;
 
     public override string GetInfo() => $"{base.GetInfo()} — air conditioner, target {TargetTemperature}°C";
+
+    public void Schedule(DateTime time)
+    {
+        NextRun = time;
+        Console.WriteLine($"Air conditioner {Brand} scheduled to run at {time}.");
+    }
 }
