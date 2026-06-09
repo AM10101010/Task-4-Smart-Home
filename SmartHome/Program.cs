@@ -14,19 +14,18 @@ class Program
     smartHomeController.AddDevice(new RobotVacuum("Xiaomi", "Living room", batteryLevel: 100));
     smartHomeController.AddDevice(new CoffeeMachine("Nespresso", "Kitchen", cupsPerBrew: 2));
     smartHomeController.AddDevice(new AirConditioner("Daikin", "Bedroom", targetTemperature: 21));
-    //smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2));
+    smartHomeController.ScheduleAllSchedulableDevices(DateTime.Now.AddHours(2)); 
+   
 
-    /*
     smartHomeController.PrintStatusReport();
     Console.WriteLine();
     smartHomeController.TurnOnAll();
     Console.WriteLine("\nStatus report:");
     smartHomeController.PrintStatusReport();
     double total = smartHomeController.GetTotalDailyEnergyUsage();
+    Console.WriteLine($"Total daily energy usage: {total} kWh");
     Console.WriteLine("\nTurning off all devices...");
     smartHomeController.TurnOffAll();
-*/
-
 
     //Del 11: Labb med new
     //Test:
@@ -35,6 +34,7 @@ class Program
     Appliance lamp2 = lamp1;
     lamp1.TurnOn(); // SmartLamp's TurnOn() körs
     lamp2.TurnOn(); // Appliance's TurnOn() körs, inte SmartLamp's
+
 
     // With "new" (current code) — output differs because the variable's type decides:
     //   Smart lamp IKEA in Hallway turns on with brightness 80%.   // lamp1 (SmartLamp)
